@@ -1,0 +1,7 @@
+<resources>
+  <color name="primary_color">#A61A1A</color>
+  <color name="secondary_color">#FFC501</color>
+  <color name="background_color">#FFFFFF</color>
+  <color name="text_hint_color">#7A7A7A</color>
+  <color name="text_inactive_color">#7A7A7A</color>
+</resources>

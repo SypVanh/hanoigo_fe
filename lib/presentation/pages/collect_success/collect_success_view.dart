@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:hanoigo/generated/assets.gen.dart';
+import 'package:hanoigo/generated/colors.gen.dart';
+import 'package:hanoigo/presentation/widgets/svg_view.dart';
 
 class CollectSuccessScreen extends StatelessWidget {
   const CollectSuccessScreen({super.key});
@@ -23,64 +27,67 @@ class CollectSuccessScreen extends StatelessWidget {
                 ),
               ),
 
+              const Gap(24),
+
               // Card nhân vật
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                elevation: 4,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // Tên và đánh giá
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Bách đại ca',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Row(
-                            children: List.generate(
-                              3,
-                              (index) => const Icon(
-                                Icons.star,
-                                color: Colors.amber,
+              Expanded(
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 4,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Tên và đánh giá
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Bách đại ca',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 16),
-
-                      // Hình nhân vật
-                      Image.asset(
-                        'assets/character.png', // Thay thế bằng đường dẫn hình ảnh
-                        height: 120,
-                        fit: BoxFit.contain,
-                      ),
-
-                      const SizedBox(height: 16),
-
-                      // Vị trí và thời gian
-                      Text(
-                        'Hoàn Kiếm, Hà Nội\n13h28\' - 10/12/2023',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey[600],
+                            Row(
+                              children: List.generate(
+                                3,
+                                (index) => const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+
+                        const SizedBox(height: 16),
+
+                        // Hình nhân vật
+                        Expanded(
+                            child: SvgView(assetPath: Assets.icons.snake.path, width: double.infinity, height: 300)),
+
+                        const SizedBox(height: 16),
+
+                        // Vị trí và thời gian
+                        const Text(
+                          'Hoàn Kiếm, Hà Nội\n13h28\' - 12/26/2024',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
+
+              const Gap(24),
 
               // Phần thưởng
               const Row(
@@ -99,10 +106,12 @@ class CollectSuccessScreen extends StatelessWidget {
                 ],
               ),
 
+              const Gap(24),
+
               // Nút nhận thưởng
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
+                  backgroundColor: ColorName.primaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -122,6 +131,8 @@ class CollectSuccessScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
+              const Gap(24),
             ],
           ),
         ),
@@ -149,7 +160,7 @@ class RewardItem extends StatelessWidget {
         Icon(
           icon,
           size: 40,
-          color: Colors.purple,
+          color: ColorName.primaryColor,
         ),
         const SizedBox(height: 4),
         Text(
@@ -157,7 +168,7 @@ class RewardItem extends StatelessWidget {
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Colors.purple,
+            color: ColorName.primaryColor,
           ),
         ),
         const SizedBox(height: 4),

@@ -243,9 +243,9 @@ class RankingSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> rankings = [
-      {'name': 'Nguyễn Văn A', 'avatar': 'https://via.placeholder.com/150', 'points': 1500},
-      {'name': 'Trần Thị B', 'avatar': 'https://via.placeholder.com/150', 'points': 1200},
-      {'name': 'Lê Văn C', 'avatar': 'https://via.placeholder.com/150', 'points': 950},
+      {'name': 'Nguyễn Văn A', 'avatar': Assets.images.naruto.path, 'points': 1500},
+      {'name': 'Trần Thị B', 'avatar': Assets.images.sasuke.path, 'points': 1200},
+      {'name': 'Lê Văn C', 'avatar': Assets.images.sakura.path, 'points': 950},
     ];
 
     return Padding(
@@ -261,11 +261,11 @@ class RankingSection extends StatelessWidget {
             itemBuilder: (context, index) {
               final user = rankings[index];
               return Padding(
-                padding: EdgeInsets.symmetric(vertical: index == 0 ? 0 : 8),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.grey[200],
+                    color: ColorName.secondaryColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
@@ -273,7 +273,7 @@ class RankingSection extends StatelessWidget {
                       // Avatar
                       CircleAvatar(
                         radius: 24,
-                        backgroundImage: NetworkImage(user['avatar'] as String), // Use NetworkImage for URLs
+                        backgroundImage: AssetImage(user['avatar']) as ImageProvider,
                       ),
                       const SizedBox(width: 16),
                       // User Info
@@ -301,7 +301,7 @@ class RankingSection extends StatelessWidget {
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                          color: Colors.orange,
+                          color: ColorName.primaryColor,
                         ),
                       ),
                     ],

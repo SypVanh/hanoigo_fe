@@ -86,6 +86,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
+  /// File path: assets/images/naruto.jpg
+  AssetGenImage get naruto => const AssetGenImage('assets/images/naruto.jpg');
+
   /// File path: assets/images/nha_hat_lon.png
   AssetGenImage get nhaHatLon => const AssetGenImage('assets/images/nha_hat_lon.png');
 
@@ -94,6 +97,12 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/quan_hoan_kiem.png
   AssetGenImage get quanHoanKiem => const AssetGenImage('assets/images/quan_hoan_kiem.png');
+
+  /// File path: assets/images/sakura.jpg
+  AssetGenImage get sakura => const AssetGenImage('assets/images/sakura.jpg');
+
+  /// File path: assets/images/sasuke.jpg
+  AssetGenImage get sasuke => const AssetGenImage('assets/images/sasuke.jpg');
 
   /// List of all assets
   List<AssetGenImage> get values => [
@@ -104,9 +113,12 @@ class $AssetsImagesGen {
         khueVanCac,
         langChuTich,
         logo,
+        naruto,
         nhaHatLon,
         quanDongDa,
-        quanHoanKiem
+        quanHoanKiem,
+        sakura,
+        sasuke
       ];
 }
 

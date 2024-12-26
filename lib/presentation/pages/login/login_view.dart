@@ -39,7 +39,7 @@ class LoginView extends MobXView<LoginViewModel> {
               children: [
                 CustomTextField(hintText: 'Email', suffixIcon: Icons.email),
                 Gap(16),
-                CustomTextField(hintText: 'Password', suffixIcon: Icons.lock),
+                CustomTextField(hintText: 'Mật khẩu', suffixIcon: Icons.lock),
               ],
             ),
           ),

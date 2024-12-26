@@ -22,17 +22,9 @@ extension HeaderSection on ExploreView {
                       width: 40,
                       height: 40,
                     ),
-                    Row(
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.notifications, color: Colors.white),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.settings, color: Colors.white),
-                          onPressed: () {},
-                        ),
-                      ],
+                    IconButton(
+                      icon: const Icon(Icons.settings, color: Colors.white),
+                      onPressed: () {},
                     ),
                   ],
                 ),

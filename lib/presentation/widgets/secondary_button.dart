@@ -3,8 +3,8 @@ import 'package:hanoigo/foundation/extension/text_ext.dart';
 import 'package:hanoigo/generated/colors.gen.dart';
 import 'package:hanoigo/presentation/pages/styles/text_style.dart';
 
-class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({required this.title, this.onPressed, super.key});
+class SecondaryButton extends StatelessWidget {
+  const SecondaryButton({required this.title, this.onPressed, super.key});
 
   final String title;
   final void Function()? onPressed;
@@ -16,13 +16,14 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: ColorName.secondaryColor, 
+          backgroundColor: Colors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(60),
+            side: const BorderSide(color: ColorName.secondaryColor),
           ),
           padding: const EdgeInsets.symmetric(vertical: 15),
         ),
-        child: Text(title).workSan_14W600().color(Colors.black),
+        child: Text(title).workSan_14W600().color(ColorName.secondaryColor),
       ),
     );
   }

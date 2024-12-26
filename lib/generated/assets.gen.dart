@@ -77,6 +77,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/image.jpg
   AssetGenImage get image => const AssetGenImage('assets/images/image.jpg');
 
+  /// File path: assets/images/kakashi.jpg
+  AssetGenImage get kakashi => const AssetGenImage('assets/images/kakashi.jpg');
+
   /// File path: assets/images/khue_van_cac.png
   AssetGenImage get khueVanCac => const AssetGenImage('assets/images/khue_van_cac.png');
 
@@ -91,6 +94,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/nha_hat_lon.png
   AssetGenImage get nhaHatLon => const AssetGenImage('assets/images/nha_hat_lon.png');
+
+  /// File path: assets/images/obito.jpg
+  AssetGenImage get obito => const AssetGenImage('assets/images/obito.jpg');
 
   /// File path: assets/images/quan_dong_da.png
   AssetGenImage get quanDongDa => const AssetGenImage('assets/images/quan_dong_da.png');
@@ -110,11 +116,13 @@ class $AssetsImagesGen {
         denNgocSon,
         hoangThanhThangLong,
         image,
+        kakashi,
         khueVanCac,
         langChuTich,
         logo,
         naruto,
         nhaHatLon,
+        obito,
         quanDongDa,
         quanHoanKiem,
         sakura,

@@ -23,13 +23,13 @@ class CollectionScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.help_outline, color: Colors.white),
-              onPressed: () {
-                // Help button logic
-              },
-            ),
+          actions: const [
+            // IconButton(
+            //   icon: const Icon(Icons.help_outline, color: Colors.white),
+            //   onPressed: () {
+            //     // Help button logic
+            //   },
+            // ),
           ],
           titleTextStyle: const TextStyle(color: Colors.white, fontSize: 24),
           backgroundColor: ColorName.primaryColor,

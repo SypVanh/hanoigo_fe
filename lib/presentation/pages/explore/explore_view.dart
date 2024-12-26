@@ -261,7 +261,7 @@ class RankingSection extends StatelessWidget {
             itemBuilder: (context, index) {
               final user = rankings[index];
               return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
+                padding: EdgeInsets.only(top: index == 0 ? 0 : 10, bottom: 10),
                 child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(

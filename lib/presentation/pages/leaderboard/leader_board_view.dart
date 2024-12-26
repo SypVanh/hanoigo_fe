@@ -1,28 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:hanoigo/generated/assets.gen.dart';
 import 'package:hanoigo/generated/colors.gen.dart';
 
-class LeaderboardView extends StatelessWidget {
-  final List<Map<String, dynamic>> leaderboardData = [
-    {"name": "Nguyễn Văn A", "avatar": "https://via.placeholder.com/150", "score": 120},
-    {"name": "Trần Thị B", "avatar": "https://via.placeholder.com/150", "score": 110},
-    {"name": "Lê Hoàng C", "avatar": "https://via.placeholder.com/150", "score": 105},
-    {"name": "Phạm Văn D", "avatar": "https://via.placeholder.com/150", "score": 95},
-    {"name": "Vũ Minh E", "avatar": "https://via.placeholder.com/150", "score": 90},
-  ];
+class LeaderboardView extends StatefulWidget {
+  const LeaderboardView({super.key});
 
-  LeaderboardView({super.key});
+  @override
+  State<LeaderboardView> createState() => _LeaderboardViewState();
+}
+
+class _LeaderboardViewState extends State<LeaderboardView> {
+  // Chế độ xem hiện tại
+  String _selectedMode = 'Tháng'; // Mặc định là "Tháng"
+
+  final List<String> _modes = ['Tháng', 'Tuần', 'Ngày']; // Các chế độ xem
+
+  final List<Map<String, dynamic>> leaderboardData = [
+    {"name": "Nguyễn Văn A", "avatar": Assets.images.naruto.path, "score": 120},
+    {"name": "Trần Thị B", "avatar": Assets.images.sasuke.path, "score": 110},
+    {"name": "Lê Hoàng C", "avatar": Assets.images.sakura.path, "score": 105},
+    {"name": "Phạm Văn D", "avatar": Assets.images.kakashi.path, "score": 95},
+    {"name": "Vũ Minh E", "avatar": Assets.images.obito.path, "score": 90},
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("Bảng Xếp Hạng Linh Thú"),
-          titleTextStyle: const TextStyle(color: Colors.white, fontSize: 24),
-          backgroundColor: ColorName.primaryColor,
-          centerTitle: true,
-          automaticallyImplyLeading: false),
+        title: const Text("Bảng Xếp Hạng Linh Thú"),
+        titleTextStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+        backgroundColor: ColorName.primaryColor,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        // automaticallyImplyLeading: false,
+      ),
       body: Column(
         children: [
+          // Dropdown chọn chế độ xem
+          _buildModeSelector(),
+
           // Phần Top 3
           _buildTopThree(context),
 
@@ -40,6 +62,38 @@ class LeaderboardView extends StatelessWidget {
                 );
               },
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildModeSelector() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            "Xem theo:",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(width: 8),
+          DropdownButton<String>(
+            value: _selectedMode,
+            items: _modes.map((mode) {
+              return DropdownMenuItem<String>(
+                value: mode,
+                child: Text(mode),
+              );
+            }).toList(),
+            onChanged: (newValue) {
+              setState(() {
+                _selectedMode = newValue!;
+                // Thay đổi dữ liệu bảng xếp hạng tương ứng tại đây (nếu có)
+                // Ví dụ: fetchLeaderboardData(newValue);
+              });
+            },
           ),
         ],
       ),
@@ -95,7 +149,7 @@ class LeaderboardView extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: rank == 1 ? 45 : 35, // Highlight for 1st place
-          backgroundImage: NetworkImage(avatar),
+          backgroundImage: AssetImage(avatar) as ImageProvider,
         ),
         const SizedBox(height: 8),
         Text(
@@ -119,7 +173,7 @@ class LeaderboardView extends StatelessWidget {
   Widget _buildLeaderboardTile({required int rank, required String name, required String avatar, required int score}) {
     return ListTile(
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(avatar),
+        backgroundImage: AssetImage(avatar) as ImageProvider,
       ),
       title: Text(
         name,

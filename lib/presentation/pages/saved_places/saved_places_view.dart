@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hanoigo/generated/assets.gen.dart';
 import 'package:hanoigo/generated/colors.gen.dart';
+import 'package:hanoigo/presentation/widgets/list_header.dart';
 
 class SavedPlacesScreen extends StatelessWidget {
   const SavedPlacesScreen({super.key});
@@ -9,65 +11,53 @@ class SavedPlacesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Địa điểm đã lưu'),
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.share,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                // Xử lý logic chia sẻ
-              },
+        title: const Text('Địa điểm đã lưu'),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.share,
+              color: Colors.white,
             ),
-          ],
-          titleTextStyle: const TextStyle(color: Colors.white, fontSize: 24),
-          backgroundColor: ColorName.primaryColor,
-          automaticallyImplyLeading: false),
+            onPressed: () {
+              // Xử lý logic chia sẻ
+            },
+          ),
+        ],
+        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 24),
+        backgroundColor: ColorName.primaryColor,
+        automaticallyImplyLeading: false,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 24),
+            const RecommendationsSection(),
+
             // Phần Nhật ký hành trình
-            const Text(
-              'Nhật ký hành trình',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 10),
-            SizedBox(
-              height: 180,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  _buildJourneyCard('Quận Hoàn Kiếm', '20 địa điểm, 8 ngày', Assets.images.quanHoanKiem.path),
-                  _buildJourneyCard('Quận Đống Đa', '20 địa điểm, 8 ngày', Assets.images.quanDongDa.path),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
+            // const Text(
+            //   'Nhật ký hành trình',
+            //   style: TextStyle(
+            //     fontSize: 18,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            // ),
+            // const SizedBox(height: 10),
+            // SizedBox(
+            //   height: 180,
+            //   child: ListView(
+            //     scrollDirection: Axis.horizontal,
+            //     children: [
+            //       _buildJourneyCard('Quận Hoàn Kiếm', '20 địa điểm, 8 ngày', Assets.images.quanHoanKiem.path),
+            //       _buildJourneyCard('Quận Đống Đa', '20 địa điểm, 8 ngày', Assets.images.quanDongDa.path),
+            //     ],
+            //   ),
+            // ),
+            const SizedBox(height: 24),
+
             // Phần Danh sách của bạn
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Danh sách của bạn',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    // Xử lý tạo mới
-                  },
-                  child: const Text('Tạo mới'),
-                ),
-              ],
-            ),
+            ListHeader(title: 'Danh sách của bạn', actionTitle: '', onTap: () {}),
             const SizedBox(height: 10),
             Expanded(
               child: GridView.count(
@@ -156,7 +146,7 @@ class SavedPlacesScreen extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Padding(
+      child: Container(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -176,6 +166,78 @@ class SavedPlacesScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class RecommendationsSection extends StatelessWidget {
+  const RecommendationsSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final recommendations = [
+      {'title': 'Nhà hát Lớn Hà Nội', 'subtitle': '1 Tràng Tiền, Hoàn Kiếm', 'imageUrl': Assets.images.nhaHatLon.path},
+      {'title': 'Đền Ngọc Sơn', 'subtitle': 'P. Đình Tiên Hoàng, Hoàn Kiếm', 'imageUrl': Assets.images.denNgocSon.path},
+      {'title': 'Khuê Văn Các', 'subtitle': 'P. Quốc Tử Giám, Đống Đa', 'imageUrl': Assets.images.khueVanCac.path},
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListHeader(title: 'Nhật ký hành trình', actionTitle: 'Xem thêm', onTap: () {}),
+        const Gap(12),
+        SizedBox(
+          height: 200,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: recommendations.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 8),
+            itemBuilder: (context, index) {
+              final item = recommendations[index];
+              return Container(
+                width: 235,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: ColorName.primaryColor, // Màu viền
+                    width: 1, // Độ dày của viền
+                  ),
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Display image from assets
+                      Center(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            item['imageUrl']!, // Đường dẫn đến ảnh trong assets
+                            width: 200,
+                            height: 110,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          const Icon(Icons.place, color: Colors.red),
+                          const Gap(8),
+                          Text(item['title']!, style: const TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      Text(item['subtitle']!, style: const TextStyle(color: Colors.grey)),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

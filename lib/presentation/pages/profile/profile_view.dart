@@ -113,6 +113,53 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
               ],
             ),
+            const SizedBox(height: 20),
+
+            // Card mô tả gợi ý lộ trình
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Gợi ý lộ trình cá nhân hóa",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      "Khám phá các địa điểm phù hợp với sở thích và nhu cầu của bạn. Hãy đánh dấu yêu thích hoặc muốn đến để hoàn thiện lộ trình của mình!",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    const SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Điều hướng tới trang gợi ý lộ trình
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const SuggestionsView(), // Thay SuggestionsView bằng màn hình bạn muốn
+                          //   ),
+                          // );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          backgroundColor: ColorName.secondaryColor,
+                        ),
+                        child: const Text(
+                          "Xem ngay",
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             const Spacer(),
 
             // Nút lưu

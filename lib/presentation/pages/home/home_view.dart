@@ -6,7 +6,7 @@ import 'package:hanoigo/presentation/pages/collection/collection_view.dart';
 import 'package:hanoigo/presentation/pages/explore/explore_view.dart';
 import 'package:hanoigo/presentation/pages/leaderboard/leader_board_view.dart';
 import 'package:hanoigo/presentation/pages/onboarding/onboarding_view.dart';
-import 'package:hanoigo/presentation/pages/place_detail/place_detail_view.dart';
+import 'package:hanoigo/presentation/pages/personalized_route/personalized_route_view.dart';
 import 'package:hanoigo/presentation/pages/profile/profile_view.dart';
 import 'package:hanoigo/presentation/pages/qr_scan/qr_scan_view.dart';
 import 'package:hanoigo/presentation/pages/saved_places/saved_places_view.dart';
@@ -72,11 +72,11 @@ class _HomeViewState extends State<HomeView> {
       case 0:
         return const SearchScreen();
       case 1:
-        return const CollectionScreen();
+        return const ChallengeScreen();
       case 2:
-        return LeaderboardView();
+        return const SimpleQRCodeScanner();
       case 3:
-        return const CollectSuccessScreen();
+        return const SavedPlacesScreen();
       case 4:
         return const ProfileView();
       default:

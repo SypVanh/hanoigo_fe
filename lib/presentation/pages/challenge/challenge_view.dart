@@ -83,7 +83,7 @@ class ChallengeScreen extends StatelessWidget {
                 ElevatedButton.icon(
                   onPressed: () {},
                   icon: const Icon(Icons.local_fire_department, size: 16),
-                  label: const Text('10'),
+                  label: const Text('4'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red.shade50,
                     foregroundColor: Colors.red,

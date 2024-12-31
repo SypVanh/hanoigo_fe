@@ -31,19 +31,65 @@ class SignupView extends MobXView<SignUpViewModel> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(flex: 1),
-          SvgView(assetPath: Assets.icons.logo.path, width: 130, height: 130),
+          // SvgView(assetPath: Assets.icons.logo.path, width: 130, height: 130),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {},
+                  child: const CircleAvatar(
+                    radius: 50,
+                    backgroundImage: null, // Ảnh mặc định
+                    child: Icon(
+                      Icons.camera_alt,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Ngôn ngữ:",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
+                    ),
+                    const Gap(20),
+                    DropdownButton<String>(
+                      value: "Tiếng Việt",
+                      items: ["Tiếng Việt", "English"]
+                          .map(
+                            (lang) => DropdownMenuItem(
+                              value: lang,
+                              child: Text(lang).color(Colors.white),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (value) {},
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
           const Spacer(flex: 1),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                CustomTextField(hintText: 'Full name', suffixIcon: Icons.person),
+                CustomTextField(hintText: 'Họ tên', suffixIcon: Icons.person),
                 Gap(16),
                 CustomTextField(hintText: 'Email', suffixIcon: Icons.email),
                 Gap(16),
-                CustomTextField(hintText: 'Phone number', suffixIcon: Icons.smartphone),
+                CustomTextField(hintText: 'Số điện thoại', suffixIcon: Icons.smartphone),
                 Gap(16),
-                CustomTextField(hintText: 'Password', suffixIcon: Icons.lock),
+                CustomTextField(hintText: 'Mật khẩu', suffixIcon: Icons.lock),
+                Gap(16),
+                CustomTextField(hintText: 'Quốc gia', suffixIcon: Icons.public),
+                Gap(16),
+                CustomTextField(hintText: 'Ngày sinh', suffixIcon: Icons.calendar_today),
               ],
             ),
           ),

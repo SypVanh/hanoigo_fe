@@ -5,6 +5,7 @@ import 'package:hanoigo/generated/assets.gen.dart';
 import 'package:hanoigo/generated/colors.gen.dart';
 import 'package:hanoigo/presentation/pages/styles/text_style.dart';
 import 'package:hanoigo/presentation/widgets/svg_view.dart';
+part './components/overview.dart';
 
 class PlaceDetailView extends StatelessWidget {
   const PlaceDetailView({super.key});
@@ -12,27 +13,26 @@ class PlaceDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tabs = List.generate(
-      4, // You can change this to create more tabs.
+      3,
       (index) {
         switch (index) {
           case 0:
-            return const Text('Tổng quan');
-          case 1:
             return const Text('Giới thiệu');
-          case 2:
+          case 1:
             return const Text('Ảnh');
-          case 3:
+          case 2:
             return const Text('Bài đánh giá');
           default:
-            return const Text('Tổng quan');
+            return const Text('Giới thiệu');
         }
       },
     );
 
-    final views = List.generate(
-      4,
-      (index) => TabContentView(index: index), // Use your complex widgets here.
-    );
+    final views = [
+      const IntroductionTabContentView(),
+      const ImageGalleryTabContentView(),
+      _buildOverviewTab(),
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -56,11 +56,10 @@ class PlaceDetailView extends StatelessWidget {
                     unselectedLabelStyle: const Text('').workSan_14W500().color(ColorName.textHintColor).style,
                     labelStyle: const Text('').workSan_14W500().color(ColorName.primaryColor).style,
                     tabs: tabs,
-                    // Remove indicator padding
                   ),
                   Expanded(
                     child: TabBarView(
-                      children: views, // Display corresponding views for each tab.
+                      children: views,
                     ),
                   )
                 ],
@@ -73,7 +72,6 @@ class PlaceDetailView extends StatelessWidget {
   }
 }
 
-/// Example of a complex widget for each tab's content.
 class TabContentView extends StatelessWidget {
   final int index;
 
@@ -87,9 +85,6 @@ class TabContentView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SvgView(assetPath: Assets.icons.logo.path, width: 130, height: 130),
-            SvgView(assetPath: Assets.icons.logo.path, width: 130, height: 130),
-            SvgView(assetPath: Assets.icons.logo.path, width: 130, height: 130),
             SvgView(assetPath: Assets.icons.logo.path, width: 130, height: 130),
             Text(
               'Tab $index Content',
@@ -111,6 +106,67 @@ class TabContentView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class IntroductionTabContentView extends StatelessWidget {
+  const IntroductionTabContentView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Khuê Văn Các là một biểu tượng văn hóa đặc trưng của Hà Nội, nằm trong khuôn viên Văn Miếu - Quốc Tử Giám. '
+              'Được xây dựng vào năm 1805 dưới triều đại nhà Nguyễn, Khuê Văn Các được sử dụng để tôn vinh những giá trị văn hóa, '
+              'giáo dục và truyền thống học thuật của Việt Nam.',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ImageGalleryTabContentView extends StatelessWidget {
+  const ImageGalleryTabContentView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final imagePaths = [
+      Assets.images.khueVanCac.path,
+      Assets.images.khueVanCac.path,
+      Assets.images.khueVanCac.path,
+      Assets.images.khueVanCac.path,
+      Assets.images.khueVanCac.path,
+      Assets.images.khueVanCac.path,
+      Assets.images.khueVanCac.path,
+      Assets.images.khueVanCac.path,
+    ];
+
+    return GridView.builder(
+      padding: const EdgeInsets.all(16.0),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+      ),
+      itemCount: imagePaths.length,
+      itemBuilder: (context, index) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: Image.asset(
+            imagePaths[index],
+            fit: BoxFit.cover,
+          ),
+        );
+      },
     );
   }
 }

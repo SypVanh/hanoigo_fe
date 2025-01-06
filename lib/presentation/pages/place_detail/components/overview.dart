@@ -1,73 +1,39 @@
-import 'package:flutter/material.dart';
+part of '../place_detail_view.dart';
 
-class OverviewScreen extends StatelessWidget {
-  const OverviewScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Tổng quan'),
-          bottom: const TabBar(
-            tabs: [
-              Tab(text: 'Tổng quan'),
-              Tab(text: 'Bài đánh giá'),
-              Tab(text: 'Ảnh'),
-              Tab(text: 'Giới thiệu'),
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: [
-            _buildOverviewTab(),
-            const Center(child: Text('Bài đánh giá')),
-            const Center(child: Text('Ảnh')),
-            const Center(child: Text('Giới thiệu')),
-          ],
-        ),
-      ),
-    );
-  }
-
+extension OverviewScreen on PlaceDetailView {
   Widget _buildOverviewTab() {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Thông tin nổi bật
-          GridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              _buildHighlightCard('1070 - Nay', 'Năm hoạt động', Icons.calendar_today),
-              _buildHighlightCard('8:00 - 17:00', 'Giờ hoạt động', Icons.access_time),
-              _buildHighlightCard('15 - 30K', 'Giá vé', Icons.attach_money),
-              _buildHighlightCard('4 - 10.2K', 'Khách mỗi ngày', Icons.people),
-            ],
-          ),
-          const SizedBox(height: 20),
-          // Bài đánh giá nổi bật
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Bài đánh giá nổi bật',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              TextButton(
-                onPressed: () {
-                  // Xử lý khi nhấn "Xem tất cả"
-                },
-                child: const Text('Xem tất cả'),
-              ),
-            ],
-          ),
+          // GridView.count(
+          //   crossAxisCount: 2,
+          //   crossAxisSpacing: 16,
+          //   mainAxisSpacing: 16,
+          //   shrinkWrap: true,
+          //   physics: const NeverScrollableScrollPhysics(),
+          //   children: [
+          //     _buildHighlightCard('1070 - Nay', 'Năm hoạt động', Icons.calendar_today),
+          //     _buildHighlightCard('8:00 - 17:00', 'Giờ hoạt động', Icons.access_time),
+          //     _buildHighlightCard('15 - 30K', 'Giá vé', Icons.attach_money),
+          //     _buildHighlightCard('4 - 10.2K', 'Khách mỗi ngày', Icons.people),
+          //   ],
+          // ),
+          // const SizedBox(height: 20),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     const Text(
+          //       'Bài đánh giá nổi bật',
+          //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          //     ),
+          //     TextButton(
+          //       onPressed: () {},
+          //       child: const Text('Xem tất cả'),
+          //     ),
+          //   ],
+          // ),
           _buildReviewCard(
             name: 'Minh Pham',
             role: 'Bậc thầy lịch sử',
@@ -83,7 +49,6 @@ class OverviewScreen extends StatelessWidget {
             comment: 'Mình đã tới đây 3 lần, lần nào cũng có nhiều kỷ niệm với nơi này~',
           ),
           const SizedBox(height: 20),
-          // Chuyên mục hỏi đáp
           const Text(
             'Chuyên mục hỏi đáp',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -158,7 +123,7 @@ class OverviewScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                          Text(role, style: const TextStyle(color: Colors.grey)),
+                          // Text(role, style: const TextStyle(color: Colors.grey)),
                         ],
                       ),
                       Text(date, style: const TextStyle(color: Colors.grey, fontSize: 12)),

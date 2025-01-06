@@ -29,7 +29,7 @@ extension HeaderSection on ExploreView {
                   ],
                 ),
                 const Gap(24),
-                const Text('Chào buổi sáng, Vanh!').workSan_30W800().color(Colors.white),
+                const Text('Chào buổi chiều, Vanh!').workSan_30W800().color(Colors.white),
                 const Gap(8),
                 const Text('Hôm nay bạn quan tâm tới địa điểm nào?').workSan_14W400().color(Colors.white),
                 const Gap(24),

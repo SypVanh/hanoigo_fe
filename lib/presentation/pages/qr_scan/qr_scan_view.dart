@@ -1,13 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hanoigo/presentation/pages/app/app_router.dart';
+import 'package:hanoigo/generated/colors.gen.dart';
+import 'package:hanoigo/presentation/pages/collect_success/collect_success_view.dart';
 import 'package:hanoigo/presentation/pages/home/home_viewmodel.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class SimpleQRCodeScanner extends StatefulWidget {
-    HomeViewModel get viewModel => Get.find<HomeViewModel>();
-    
+  HomeViewModel get viewModel => Get.find<HomeViewModel>();
+
   static const routeName = "/simple_qr_scanner";
 
   const SimpleQRCodeScanner({super.key});
@@ -23,6 +26,7 @@ class _SimpleQRCodeScannerState extends State<SimpleQRCodeScanner> {
   @override
   void initState() {
     super.initState();
+    _isScanning = true;
     _controller = MobileScannerController(formats: [BarcodeFormat.qrCode]);
     // _requestCameraPermission();
   }
@@ -74,6 +78,9 @@ class _SimpleQRCodeScannerState extends State<SimpleQRCodeScanner> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quét mã QR'),
+        titleTextStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+        backgroundColor: ColorName.primaryColor,
+        centerTitle: true,
       ),
       body: _isScanning
           ? MobileScanner(
@@ -85,7 +92,30 @@ class _SimpleQRCodeScannerState extends State<SimpleQRCodeScanner> {
                   setState(() {
                     _isScanning = false;
                   });
-                  Navigator.pushNamed(context, Routes.PLACE_DETAIL);
+                  if (qrCode != null) {
+                    try {
+                      final Map<String, dynamic> decoded = jsonDecode(qrCode);
+                      final int? placeId = decoded['place_id'];
+                      final int? collectibleItemId = decoded['collectible_item_id'];
+                      bool flag = true;
+                      if (collectibleItemId != null) {
+                        final item = getCollectibleItemById(collectibleItemId);
+                        final result = await Get.dialog(
+                          CollectSuccessScreen(item: item),
+                        );
+
+                        if (result == 'reward_collected') {
+                          if (placeId != null) {
+                            flag = false;
+                            widget.viewModel.toPlaceDetail(placeId);
+                          }
+                        }
+                      }
+                      if (flag && placeId != null) widget.viewModel.toPlaceDetail(placeId);
+                    } catch (e) {
+                      print('Error decoding QR Code: $e');
+                    }
+                  }
                 }
               },
             )

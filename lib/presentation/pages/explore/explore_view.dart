@@ -6,6 +6,7 @@ import 'package:hanoigo/foundation/extension/text_ext.dart';
 import 'package:hanoigo/generated/assets.gen.dart';
 import 'package:hanoigo/generated/colors.gen.dart';
 import 'package:hanoigo/presentation/pages/home/home_viewmodel.dart';
+import 'package:hanoigo/presentation/pages/location/location.dart';
 import 'package:hanoigo/presentation/pages/styles/text_style.dart';
 import 'package:hanoigo/presentation/widgets/custom_textfield.dart';
 import 'package:hanoigo/presentation/widgets/list_header.dart';
@@ -166,15 +167,14 @@ class ChallengeCard extends StatelessWidget {
 
 // Recommendations Section
 class RecommendationsSection extends StatelessWidget {
+   HomeViewModel get viewModel => Get.find<HomeViewModel>();
+
   const RecommendationsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final recommendations = [
-      {'title': 'Nhà hát Lớn Hà Nội', 'subtitle': '1 Tràng Tiền, Hoàn Kiếm', 'imageUrl': Assets.images.nhaHatLon.path},
-      {'title': 'Đền Ngọc Sơn', 'subtitle': 'P. Đình Tiên Hoàng, Hoàn Kiếm', 'imageUrl': Assets.images.denNgocSon.path},
-      {'title': 'Khuê Văn Các', 'subtitle': 'P. Quốc Tử Giám, Đống Đa', 'imageUrl': Assets.images.khueVanCac.path},
-    ];
+    
+    final recommendations = hanoiLocations;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -191,43 +191,46 @@ class RecommendationsSection extends StatelessWidget {
               separatorBuilder: (_, __) => const SizedBox(width: 8),
               itemBuilder: (context, index) {
                 final item = recommendations[index];
-                return Container(
-                  width: 235,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: ColorName.primaryColor,
-                      width: 1,
+                return InkWell(
+                  onTap: () => viewModel.toPlaceDetail(item.id),
+                  child: Container(
+                    width: 235,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: ColorName.primaryColor,
+                        width: 1,
+                      ),
+                      color: Colors.white,
                     ),
-                    color: Colors.white,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Display image from assets
-                        Center(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              item['imageUrl']!,
-                              width: 200,
-                              height: 110,
-                              fit: BoxFit.cover,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Display image from assets
+                          Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                item.imageUrl,
+                                width: 200,
+                                height: 110,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          children: [
-                            const Icon(Icons.place, color: Colors.red),
-                            const Gap(8),
-                            Text(item['title']!, style: const TextStyle(fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                        Text(item['subtitle']!, style: const TextStyle(color: Colors.grey)),
-                      ],
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              const Icon(Icons.place, color: Colors.red),
+                              const Gap(8),
+                              Text(item.name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                          Text(item.address, style: const TextStyle(color: Colors.grey, overflow: TextOverflow.ellipsis)),
+                        ],
+                      ),
                     ),
                   ),
                 );

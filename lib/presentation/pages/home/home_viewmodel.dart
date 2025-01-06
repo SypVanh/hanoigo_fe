@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hanoigo/domain/usecases/auth_usecase.dart';
 import 'package:hanoigo/foundation/architecture/mobx_viewmodel.dart';
+import 'package:hanoigo/generated/assets.gen.dart';
 import 'package:hanoigo/presentation/pages/app/app_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
@@ -9,6 +10,35 @@ import 'package:mobx/mobx.dart';
 part '../../../generated/presentation/pages/home/home_viewmodel.g.dart';
 
 class HomeViewModel = _HomeViewModel with _$HomeViewModel;
+
+class CollectibleItem {
+  final int id;
+  final String name;
+  final String imagePath;
+
+  CollectibleItem({
+    required this.id,
+    required this.name,
+    required this.imagePath,
+  });
+}
+
+final List<CollectibleItem> collectibleItems = [
+  CollectibleItem(id: 1, name: 'Buffalo', imagePath: Assets.icons.buffalo.path),
+  CollectibleItem(id: 2, name: 'Chicken', imagePath: Assets.icons.chicken.path),
+  CollectibleItem(id: 3, name: 'Dragon', imagePath: Assets.icons.dragon.path),
+  CollectibleItem(id: 4, name: 'Goat', imagePath: Assets.icons.goat.path),
+  CollectibleItem(id: 5, name: 'Horse', imagePath: Assets.icons.horse.path),
+  CollectibleItem(id: 6, name: 'Monkey', imagePath: Assets.icons.monkey.path),
+  CollectibleItem(id: 7, name: 'Snake', imagePath: Assets.icons.snake.path),
+];
+
+CollectibleItem getCollectibleItemById(int id) {
+  return collectibleItems.firstWhere(
+    (item) => item.id == id,
+    orElse: () => collectibleItems.first,
+  );
+}
 
 abstract class _HomeViewModel extends MobXViewModel<AuthUseCase, AppRouter> with Store {
   @observable
@@ -84,6 +114,10 @@ abstract class _HomeViewModel extends MobXViewModel<AuthUseCase, AppRouter> with
   }
 
   Future? toPlaceDetail(int placeId) async {
+    await navigator.toPlaceDetail(id: placeId);
+  }
+
+  Future? toCollectAnimal(int placeId) async {
     await navigator.toPlaceDetail(id: placeId);
   }
 }

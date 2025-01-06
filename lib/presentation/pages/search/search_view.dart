@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hanoigo/generated/assets.gen.dart';
 import 'package:hanoigo/generated/colors.gen.dart';
-import 'package:hanoigo/presentation/widgets/imgage_view.dart';
+import 'package:hanoigo/presentation/widgets/image_view.dart';
 import 'package:hanoigo/presentation/widgets/list_header.dart';
 
 class SearchScreen extends StatelessWidget {

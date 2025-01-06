@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hanoigo/generated/assets.gen.dart';
 import 'package:hanoigo/generated/colors.gen.dart';
+import 'package:hanoigo/presentation/pages/home/home_viewmodel.dart';
 import 'package:hanoigo/presentation/widgets/svg_view.dart';
 
 class CollectSuccessScreen extends StatelessWidget {
-  const CollectSuccessScreen({super.key});
+  final CollectibleItem item;
+  const CollectSuccessScreen({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow[600], // Màu nền chính
+      backgroundColor: Colors.yellow[600],
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Phần tiêu đề
               const Text(
                 'Thu thập thành công',
                 style: TextStyle(
@@ -26,10 +26,7 @@ class CollectSuccessScreen extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-
               const Gap(24),
-
-              // Card nhân vật
               Expanded(
                 child: Card(
                   shape: RoundedRectangleBorder(
@@ -41,13 +38,12 @@ class CollectSuccessScreen extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        // Tên và đánh giá
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              'Bách đại ca',
-                              style: TextStyle(
+                            Text(
+                              item.name,
+                              style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -63,33 +59,23 @@ class CollectSuccessScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         const SizedBox(height: 16),
-
-                        // Hình nhân vật
-                        Expanded(
-                            child: SvgView(assetPath: Assets.icons.snake.path, width: double.infinity, height: 300)),
-
-                        const SizedBox(height: 16),
-
-                        // Vị trí và thời gian
-                        const Text(
-                          'Hoàn Kiếm, Hà Nội\n13h28\' - 12/26/2024',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                          ),
-                        ),
+                        Expanded(child: SvgView(assetPath: item.imagePath, width: double.infinity, height: 300)),
+                        // const SizedBox(height: 16),
+                        // const Text(
+                        //   'Hoàn Kiếm, Hà Nội\n13h28\' - 12/26/2024',
+                        //   textAlign: TextAlign.center,
+                        //   style: TextStyle(
+                        //     fontSize: 16,
+                        //     color: Colors.black,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
                 ),
               ),
-
               const Gap(24),
-
-              // Phần thưởng
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -105,10 +91,7 @@ class CollectSuccessScreen extends StatelessWidget {
                   ),
                 ],
               ),
-
               const Gap(24),
-
-              // Nút nhận thưởng
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ColorName.primaryColor,
@@ -121,7 +104,7 @@ class CollectSuccessScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  // Xử lý sự kiện khi nhấn nút
+                  Navigator.pop(context, 'reward_collected');
                 },
                 child: const Text(
                   'Nhận thưởng',
@@ -131,7 +114,6 @@ class CollectSuccessScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
               const Gap(24),
             ],
           ),

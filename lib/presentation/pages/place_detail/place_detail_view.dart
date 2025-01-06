@@ -3,10 +3,10 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:hanoigo/foundation/extension/text_ext.dart';
 import 'package:hanoigo/generated/colors.gen.dart';
+import 'package:hanoigo/presentation/pages/location/location.dart';
 import 'package:hanoigo/presentation/pages/place_detail/place.dart';
 import 'package:hanoigo/presentation/pages/place_detail/review.dart';
 import 'package:hanoigo/presentation/pages/styles/text_style.dart';
-part './components/overview.dart';
 
 class PlaceDetailView extends StatefulWidget {
   final int placeId;
@@ -34,7 +34,7 @@ class _PlaceDetailViewState extends State<PlaceDetailView> {
 
   @override
   Widget build(BuildContext context) {
-    final place = places.firstWhere((place) => place.id == placeId);
+    final place = getLocationByPlaceId(placeId);
 
     final tabs = List.generate(
       3,
@@ -60,22 +60,25 @@ class _PlaceDetailViewState extends State<PlaceDetailView> {
 
     return Scaffold(
       appBar: AppBar(
+        title: Column(
+          children: [
+            Text(place.name, style: const TextStyle(fontSize: 16, color: Colors.white)),
+            Text(place.address, style: const TextStyle(fontSize: 16, color: Colors.white)),
+          ],
+        ),
+        backgroundColor: ColorName.primaryColor,
+        centerTitle: true,
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text(place.name, style: const TextStyle(fontSize: 14)),
-        centerTitle: true,
       ),
       body: Column(
         children: [
-          Text(place.address, style: const TextStyle(fontSize: 14)).center(),
-          Image.asset(place.imagePath, width: 130, height: 130),
+          const Gap(8),
+          Image.asset(place.imageUrl, width: 130, height: 130),
           const Gap(8),
           Expanded(
             child: DefaultTabController(
@@ -105,7 +108,7 @@ class _PlaceDetailViewState extends State<PlaceDetailView> {
 }
 
 class IntroductionTabContentView extends StatelessWidget {
-  final Place place;
+  final Location place;
 
   const IntroductionTabContentView({super.key, required this.place});
 
@@ -129,7 +132,7 @@ class IntroductionTabContentView extends StatelessWidget {
 }
 
 class ImageGalleryTabContentView extends StatelessWidget {
-  final Place place;
+  final Location place;
 
   const ImageGalleryTabContentView({super.key, required this.place});
 
@@ -142,12 +145,12 @@ class ImageGalleryTabContentView extends StatelessWidget {
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
       ),
-      itemCount: place.imageGallery.length,
+      itemCount: 1,
       itemBuilder: (context, index) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(8.0),
           child: Image.asset(
-            place.imageGallery[index],
+            place.imageUrl,
             fit: BoxFit.cover,
           ),
         );
@@ -157,7 +160,7 @@ class ImageGalleryTabContentView extends StatelessWidget {
 }
 
 class CommentTabContentView extends StatelessWidget {
-  final Place place;
+  final Location place;
 
   const CommentTabContentView({super.key, required this.place});
 

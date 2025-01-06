@@ -14,7 +14,6 @@ class ImageView extends StatelessWidget {
         assetPath,
         width: width,
         height: height,
-        fit: BoxFit.cover,
       ),
     );
   }

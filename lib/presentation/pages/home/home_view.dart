@@ -25,7 +25,7 @@ class HomeView extends MobXView<HomeViewModel> {
     final args = Get.arguments as Map<String, dynamic>?;
     final initialPageIndex = args?['initialPageIndex'] ?? 0;
     final viewModel = Get.find<HomeViewModel>();
-    viewModel.setCurrentPageIndex(initialPageIndex); // Gán giá trị ban đầu
+    viewModel.setCurrentPageIndex(initialPageIndex);
     return const HomeView();
   }
 

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hanoigo/presentation/pages/app/app_router.dart';
+import 'package:hanoigo/presentation/pages/home/home_viewmodel.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class SimpleQRCodeScanner extends StatefulWidget {
+    HomeViewModel get viewModel => Get.find<HomeViewModel>();
+    
   static const routeName = "/simple_qr_scanner";
 
   const SimpleQRCodeScanner({super.key});
@@ -23,7 +27,6 @@ class _SimpleQRCodeScannerState extends State<SimpleQRCodeScanner> {
     // _requestCameraPermission();
   }
 
-  /// Kiểm tra và yêu cầu quyền truy cập camera
   Future<void> _requestCameraPermission() async {
     final status = await Permission.camera.status;
     if (!status.isGranted) {
@@ -34,7 +37,6 @@ class _SimpleQRCodeScannerState extends State<SimpleQRCodeScanner> {
     }
   }
 
-  /// Hiển thị thông báo khi quyền camera bị từ chối
   void _showPermissionError() {
     showDialog(
       context: context,

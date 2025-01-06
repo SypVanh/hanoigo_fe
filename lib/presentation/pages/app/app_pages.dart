@@ -5,10 +5,8 @@ import 'package:hanoigo/presentation/pages/collection/collection_view.dart';
 import 'package:hanoigo/presentation/pages/home/home_view.dart';
 import 'package:hanoigo/presentation/pages/leaderboard/leader_board_view.dart';
 import 'package:hanoigo/presentation/pages/login/login_view.dart';
-import 'package:hanoigo/presentation/pages/onboarding/onboarding_view.dart';
 import 'package:hanoigo/presentation/pages/personalized_route/personalized_route_view.dart';
 import 'package:hanoigo/presentation/pages/place_detail/place_detail_view.dart';
-import 'package:hanoigo/presentation/pages/profile/profile_view.dart';
 import 'package:hanoigo/presentation/pages/search/search_view.dart';
 import 'package:hanoigo/presentation/pages/signup/signup_view.dart';
 
@@ -18,8 +16,10 @@ class AppPages {
   static final routes = [
     GetPage(
       name: Routes.INITIAL,
-      page: OnboardingView.new,
-      binding: OnboardingBinding(),
+      // page: OnboardingView.new,
+      // binding: OnboardingBinding(),
+      page: () => HomeView.fromArguments(),
+      binding: HomeBinding(),
     ),
     GetPage(
       name: Routes.LOGIN,
@@ -38,7 +38,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.PLACE_DETAIL,
-      page: PlaceDetailView.new,
+      page: () => PlaceDetailView.fromArguments(),
     ),
     GetPage(
       name: Routes.COLLECTION,

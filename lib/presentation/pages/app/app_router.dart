@@ -224,27 +224,43 @@ class AppRouterImpl implements AppRouter {
   /// PlaceDetail Router
   @override
   Future? toPlaceDetail({int? id}) {
-    return Get.toNamed(Routes.PLACE_DETAIL, id: id);
+    return Get.toNamed(
+      Routes.PLACE_DETAIL,
+      arguments: {'placeId': id},
+    );
   }
 
   @override
   Future? offAllPlaceDetail({int? id}) {
-    return Get.offAllNamed(Routes.PLACE_DETAIL, id: id);
+    return Get.offAllNamed(
+      Routes.PLACE_DETAIL,
+      arguments: {'placeId': id},
+    );
   }
 
   @override
   Future? offAndToPlaceDetail({int? id}) {
-    return Get.offAndToNamed(Routes.PLACE_DETAIL, id: id);
+    return Get.offAllNamed(
+      Routes.PLACE_DETAIL,
+      arguments: {'placeId': id},
+    );
   }
 
   @override
   Future? offPlaceDetail({int? id}) {
-    return Get.offNamed(Routes.PLACE_DETAIL, id: id);
+    return Get.offAllNamed(
+      Routes.PLACE_DETAIL,
+      arguments: {'placeId': id},
+    );
   }
 
   @override
   Future? offUntilPlaceDetail({int? id}) {
-    return Get.offNamedUntil(Routes.PLACE_DETAIL, (_) => false, id: id);
+    return Get.offNamedUntil(
+      Routes.PLACE_DETAIL,
+      (_) => false,
+      arguments: {'initialPageIndex': id},
+    );
   }
 
   /// Collection Router

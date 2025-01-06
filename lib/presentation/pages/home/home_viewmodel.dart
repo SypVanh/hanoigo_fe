@@ -82,4 +82,8 @@ abstract class _HomeViewModel extends MobXViewModel<AuthUseCase, AppRouter> with
   Future? toPersonalizedRoute() async {
     await navigator.toPersonalizedRoute();
   }
+
+  Future? toPlaceDetail(int placeId) async {
+    await navigator.toPlaceDetail(id: placeId);
+  }
 }

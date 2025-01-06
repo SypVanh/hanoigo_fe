@@ -1,14 +1,12 @@
 // ignore_for_file: constant_identifier_names
 import 'package:get/get.dart';
 import 'package:hanoigo/presentation/pages/app/app_router.dart';
-import 'package:hanoigo/presentation/pages/collect_success/collect_success_view.dart';
 import 'package:hanoigo/presentation/pages/collection/collection_view.dart';
 import 'package:hanoigo/presentation/pages/home/home_view.dart';
 import 'package:hanoigo/presentation/pages/leaderboard/leader_board_view.dart';
 import 'package:hanoigo/presentation/pages/login/login_view.dart';
 import 'package:hanoigo/presentation/pages/onboarding/onboarding_view.dart';
 import 'package:hanoigo/presentation/pages/place_detail/place_detail_view.dart';
-import 'package:hanoigo/presentation/pages/search/search_view.dart';
 import 'package:hanoigo/presentation/pages/signup/signup_view.dart';
 
 class AppPages {
@@ -32,7 +30,8 @@ class AppPages {
     ),
     GetPage(
       name: Routes.HOME,
-      page: HomeView.new,
+      page: () => HomeView.fromArguments(),
+      binding: HomeBinding(),
     ),
     GetPage(
       name: Routes.PLACE_DETAIL,

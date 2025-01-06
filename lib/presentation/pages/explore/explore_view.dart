@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:hanoigo/foundation/extension/text_ext.dart';
 import 'package:hanoigo/generated/assets.gen.dart';
 import 'package:hanoigo/generated/colors.gen.dart';
+import 'package:hanoigo/presentation/pages/home/home_viewmodel.dart';
 import 'package:hanoigo/presentation/pages/styles/text_style.dart';
 import 'package:hanoigo/presentation/widgets/custom_textfield.dart';
 import 'package:hanoigo/presentation/widgets/list_header.dart';
@@ -13,43 +15,44 @@ import 'package:hanoigo/presentation/widgets/svg_view.dart';
 part './components/header_section.dart';
 part './components/category_list.dart';
 
-class ExploreBinding implements Bindings {
-  @override
-  void dependencies() {}
-}
-
 class ExploreView extends StatelessWidget {
+  HomeViewModel get viewModel => Get.find<HomeViewModel>();
+
   const ExploreView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Column(
-        children: [
-          _buildHeaderSection(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildCategoryList(),
-                  const Gap(32),
-                  // const MapSection(),
-                  // const Gap(32),
-                  const ChallengeCard(),
-                  const Gap(32),
-                  const RecommendationsSection(),
-                  const Gap(32),
-                  const RankingSection(),
-                  const Gap(32),
-                ],
+    return Observer(builder: (context) {
+      return Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Column(
+          children: [
+            _buildHeaderSection(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildCategoryList(),
+                    const Gap(32),
+                    // const MapSection(),
+                    // const Gap(32),
+                    ChallengeCard(
+                      onPressed: () => viewModel.setCurrentPageIndex(1),
+                    ),
+                    const Gap(32),
+                    const RecommendationsSection(),
+                    const Gap(32),
+                    const RankingSection(),
+                    const Gap(32),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }
 
@@ -109,7 +112,8 @@ class MapSection extends StatelessWidget {
 
 // Challenge Card
 class ChallengeCard extends StatelessWidget {
-  const ChallengeCard({super.key});
+  final VoidCallback onPressed;
+  const ChallengeCard({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +154,7 @@ class ChallengeCard extends StatelessWidget {
                   ),
                 ),
                 const Gap(16),
-                PrimaryButton(title: 'Tham gia ngay', onPressed: () {}),
+                PrimaryButton(title: 'Tham gia ngay', onPressed: onPressed),
               ],
             ),
           ),
@@ -192,8 +196,8 @@ class RecommendationsSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: ColorName.primaryColor, // Màu viền
-                      width: 1, // Độ dày của viền
+                      color: ColorName.primaryColor,
+                      width: 1,
                     ),
                     color: Colors.white,
                   ),
@@ -207,7 +211,7 @@ class RecommendationsSection extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: Image.asset(
-                              item['imageUrl']!, // Đường dẫn đến ảnh trong assets
+                              item['imageUrl']!,
                               width: 200,
                               height: 110,
                               fit: BoxFit.cover,

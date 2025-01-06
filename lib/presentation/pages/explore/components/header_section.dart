@@ -45,10 +45,11 @@ extension HeaderSection on ExploreView {
                 borderRadius: const BorderRadius.all(Radius.circular(60)),
                 border: Border.all(width: 2, color: ColorName.primaryColor),
               ),
-              child: const CustomTextField(
+              child: CustomTextField(
                 hintText: 'Tìm kiếm tại đây...',
                 suffixIcon: Icons.search,
                 borderRadius: 60,
+                onSubmitted: (searchText) => viewModel.toSearch(),
               ),
             ),
           ),

@@ -12,6 +12,8 @@ abstract class Routes {
   static const PLACE_DETAIL = '/place_detail';
   static const COLLECTION = '/collection';
   static const RANKING = '/ranking';
+  static const SEARCH = '/search';
+  static const PERSONALIZED_ROUTE = '/personalize_route';
 }
 
 abstract class AppRouter {
@@ -67,6 +69,20 @@ abstract class AppRouter {
   Future? offAndToRanking({int? id});
   Future? offRanking({int? id});
   Future? offUntilRanking({int? id});
+
+  /// Search Router
+  Future? toSearch({int? id});
+  Future? offAllSearch({int? id});
+  Future? offAndToSearch({int? id});
+  Future? offSearch({int? id});
+  Future? offUntilSearch({int? id});
+
+  /// PersonalizedRoute Router
+  Future? toPersonalizedRoute({int? id});
+  Future? offAllPersonalizedRoute({int? id});
+  Future? offAndToPersonalizedRoute({int? id});
+  Future? offPersonalizedRoute({int? id});
+  Future? offUntilPersonalizedRoute({int? id});
 }
 
 class AppRouterImpl implements AppRouter {
@@ -281,5 +297,57 @@ class AppRouterImpl implements AppRouter {
   @override
   Future? offUntilRanking({int? id}) {
     return Get.offNamedUntil(Routes.RANKING, (_) => false, id: id);
+  }
+
+  /// Search Router
+  @override
+  Future? toSearch({int? id}) {
+    return Get.toNamed(Routes.SEARCH, id: id);
+  }
+
+  @override
+  Future? offAllSearch({int? id}) {
+    return Get.offAllNamed(Routes.SEARCH, id: id);
+  }
+
+  @override
+  Future? offAndToSearch({int? id}) {
+    return Get.offAndToNamed(Routes.SEARCH, id: id);
+  }
+
+  @override
+  Future? offSearch({int? id}) {
+    return Get.offNamed(Routes.SEARCH, id: id);
+  }
+
+  @override
+  Future? offUntilSearch({int? id}) {
+    return Get.offNamedUntil(Routes.SEARCH, (_) => false, id: id);
+  }
+
+  /// PersonalizedRoute Router
+  @override
+  Future? toPersonalizedRoute({int? id}) {
+    return Get.toNamed(Routes.PERSONALIZED_ROUTE, id: id);
+  }
+
+  @override
+  Future? offAllPersonalizedRoute({int? id}) {
+    return Get.offAllNamed(Routes.PERSONALIZED_ROUTE, id: id);
+  }
+
+  @override
+  Future? offAndToPersonalizedRoute({int? id}) {
+    return Get.offAndToNamed(Routes.PERSONALIZED_ROUTE, id: id);
+  }
+
+  @override
+  Future? offPersonalizedRoute({int? id}) {
+    return Get.offNamed(Routes.PERSONALIZED_ROUTE, id: id);
+  }
+
+  @override
+  Future? offUntilPersonalizedRoute({int? id}) {
+    return Get.offNamedUntil(Routes.PERSONALIZED_ROUTE, (_) => false, id: id);
   }
 }

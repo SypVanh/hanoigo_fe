@@ -242,6 +242,8 @@ class RecommendationsSection extends StatelessWidget {
 
 // Ranking Section
 class RankingSection extends StatelessWidget {
+  HomeViewModel get viewModel => Get.find<HomeViewModel>();
+
   const RankingSection({super.key});
 
   @override
@@ -257,7 +259,12 @@ class RankingSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ListHeader(title: 'Bảng xếp hạng', actionTitle: 'Xem tất cả', onTap: () {}),
+          ListHeader(
+              title: 'Bảng xếp hạng',
+              actionTitle: 'Xem tất cả',
+              onTap: () {
+                viewModel.toLeaderboard();
+              }),
           ListView.builder(
             itemCount: rankings.length,
             shrinkWrap: true, // To prevent ListView inside Column layout issues

@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.controller,
     this.onChanged,
+    this.onSubmitted,
     this.cursorColor = Colors.black,
     this.borderRadius = 24,
     this.isHidden = false,
@@ -19,6 +20,7 @@ class CustomTextField extends StatelessWidget {
   final IconData? suffixIcon;
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
   final Color cursorColor;
   final double borderRadius;
   final bool isHidden;
@@ -28,6 +30,7 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       controller: controller,
       onChanged: onChanged,
+      onSubmitted: onSubmitted,
       obscureText: isHidden,
       cursorColor: cursorColor,
       decoration: InputDecoration(

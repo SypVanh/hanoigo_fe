@@ -28,13 +28,6 @@ class SearchScreen extends StatelessWidget {
         'statusColor': Colors.red.shade100,
         'imageUrl': 'https://via.placeholder.com/150',
       },
-      // {
-      //   'name': 'Lăng Chủ tịch Hồ Chí Minh',
-      //   'address': 'Hùng Vương, Điện Biên, Ba Đình, Hà Nội',
-      //   'status': 'Đang mở cửa',
-      //   'statusColor': Colors.red.shade100,
-      //   'imageUrl': 'https://via.placeholder.com/150',
-      // },
       {
         'name': 'Nhà hát Lớn Hà Nội',
         'address': '1 Tràng Tiền, Phan Chu Trinh, Hoàn Kiếm, Hà Nội',

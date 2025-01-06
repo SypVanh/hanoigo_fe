@@ -11,7 +11,6 @@ class PersonalizedRouteScreen extends StatefulWidget {
 }
 
 class _PersonalizedRouteScreenState extends State<PersonalizedRouteScreen> {
-  // Danh sách địa điểm
   final List<Map<String, dynamic>> places = [
     {
       "image": Assets.images.langChuTich.path,
@@ -60,8 +59,6 @@ class _PersonalizedRouteScreenState extends State<PersonalizedRouteScreen> {
       ),
       body: Column(
         children: [
-          // Mô tả gợi ý lộ trình
-          // _buildHeaderDescription(),
           const Gap(24),
           Expanded(
             child: ListView.builder(
@@ -76,7 +73,6 @@ class _PersonalizedRouteScreenState extends State<PersonalizedRouteScreen> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Hình ảnh địa điểm
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.asset(
@@ -87,7 +83,6 @@ class _PersonalizedRouteScreenState extends State<PersonalizedRouteScreen> {
                           ),
                         ),
                         const SizedBox(width: 16),
-                        // Thông tin địa điểm
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +105,6 @@ class _PersonalizedRouteScreenState extends State<PersonalizedRouteScreen> {
                               const SizedBox(height: 8),
                               Row(
                                 children: [
-                                  // Icon "Yêu thích"
                                   IconButton(
                                     onPressed: () {
                                       setState(() {
@@ -122,7 +116,6 @@ class _PersonalizedRouteScreenState extends State<PersonalizedRouteScreen> {
                                       color: place['isFavorite'] ? Colors.red : Colors.grey,
                                     ),
                                   ),
-                                  // Icon "Muốn đến"
                                   IconButton(
                                     onPressed: () {
                                       setState(() {
@@ -147,21 +140,6 @@ class _PersonalizedRouteScreenState extends State<PersonalizedRouteScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildHeaderDescription() {
-    return const Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Text(
-        "Gợi ý lộ trình cá nhân hóa giúp bạn khám phá các địa điểm phù hợp với sở thích và nhu cầu của bạn. Hãy đánh dấu yêu thích hoặc muốn đến để hoàn thiện lộ trình của mình!",
-        style: TextStyle(
-          fontSize: 16,
-          color: Colors.black,
-          height: 1.5, // Tăng khoảng cách giữa các dòng
-        ),
-        textAlign: TextAlign.justify,
       ),
     );
   }

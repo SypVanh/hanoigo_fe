@@ -1,16 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:hanoigo/domain/usecases/user_usecase.dart';
 import 'package:hanoigo/foundation/architecture/mobx_view.dart';
 import 'package:hanoigo/foundation/extension/text_ext.dart';
-import 'package:hanoigo/generated/assets.gen.dart';
 import 'package:hanoigo/generated/colors.gen.dart';
 import 'package:hanoigo/presentation/pages/signup/signup_viewmodel.dart';
 import 'package:hanoigo/presentation/pages/styles/text_style.dart';
 import 'package:hanoigo/presentation/widgets/custom_background.dart';
 import 'package:hanoigo/presentation/widgets/custom_textfield.dart';
-import 'package:hanoigo/presentation/widgets/svg_view.dart';
 import 'package:hanoigo/presentation/widgets/primary_button.dart';
 
 class SignupBinding implements Bindings {
@@ -31,24 +32,26 @@ class SignupView extends MobXView<SignUpViewModel> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(flex: 1),
-          // SvgView(assetPath: Assets.icons.logo.path, width: 130, height: 130),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: const CircleAvatar(
-                    radius: 50,
-                    backgroundImage: null, // Ảnh mặc định
-                    child: Icon(
-                      Icons.camera_alt,
-                      size: 30,
-                      color: Colors.white,
+                Observer(builder: (context) {
+                  return GestureDetector(
+                    onTap: viewModel.pickImage,
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage:
+                          viewModel.avatarPath != null ? Image.file(File(viewModel.avatarPath!)).image : null,
+                      child: const Icon(
+                        Icons.camera_alt,
+                        size: 30,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                }),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -63,7 +66,7 @@ class SignupView extends MobXView<SignUpViewModel> {
                           .map(
                             (lang) => DropdownMenuItem(
                               value: lang,
-                              child: Text(lang).color(Colors.white),
+                              child: Text(lang).color(Colors.black),
                             ),
                           )
                           .toList(),
